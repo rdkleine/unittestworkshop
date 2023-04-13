@@ -1,5 +1,5 @@
 ﻿namespace Service.Tests;
-public class Class1
+public class EmployeeServiceTest
 {
 
 }

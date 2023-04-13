@@ -17,12 +17,15 @@ Slide 2: What is a Unit Test?
 A Unit Test is a type of software testing where individual units or components of a software application are tested in isolation
 It involves writing test code that exercises the functionality of a specific unit or component of code
 The goal is to ensure that the unit or component works as expected and meets its design specifications
+
+
 Slide 3: Why Unit Test?
 
 Unit Testing helps catch bugs early in the development cycle, when they are easier and less expensive to fix
 It provides a safety net for developers when making changes to the codebase, ensuring that existing functionality is not inadvertently broken
 It helps to improve the overall quality of the codebase and reduce technical debt
 It helps to improve the maintainability of the codebase, making it easier to understand, modify and refactor
+
 Slide 4: How to write a Unit Test
 
 Identify the unit or component of code that needs to be tested

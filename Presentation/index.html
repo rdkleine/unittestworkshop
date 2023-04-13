@@ -20,10 +20,77 @@
 					<textarea data-template>
 					## Introductie
 					Welkom bij de Unit Test workshop.
-					Vandag gaan we leren wat Unit Testen zijn en waarom het belangrijk is.
+					Vandaag gaan we leren wat Unit Testen zijn en waarom het belangrijk is om te testen.
 				</textarea>
 				</section>
-				<section>Slide 2</section>
+				<section>
+					Wat is een Unit Test
+					<ul>
+						<li>Unit of work (function / class / component)</li>
+						<li>Geisoleerd testen</li>
+						<li>Testen of voldaan wordt aan de specs</li>
+					</ul>
+				</section>
+				<section>
+					Waarom Unit Test
+					<ul>
+						<li>Vroegtijdig in het ontwikkelstadion bugs vinden</li>
+						<li>Vangnet wanneer wijzigingen in de codebase worden gemaakt</li>
+						<li>Onderhoudbaarheid van de codebase vergroten</li>
+					</ul>
+				</section>
+				<section>
+					Hoe schrijven we Unit Tests
+					<ul>
+						<li>Identificeer een unit of code die getest moet worden</li>
+						<li>Schrijf een test methode die de functionaliteit uitvoerd</li>
+						<li>Gebruik Assertion om te valideren of de code goed uitgevoerd is</li>
+					</ul>
+				</section>
+				<section>Voorbeeld van een Unit Test
+					<pre>
+// Test Method
+public void TestAddition()
+{
+    // Arrange
+    Calculator calculator = new Calculator();
+    
+    // Act
+    int result = calculator.Add(2, 3);
+    
+    // Assert
+    Assert.AreEqual(5, result);
+}
+// Code under test
+public class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+					</pre>
+				</section>
+				<section>
+					Best prectices
+					<ul>
+						<li>Schrijf testen die onafhankelijk zijn van elkaar</li>
+						<li>Test voor resultaat niet de implementatie details</li>
+						<li>Houdt testen klein en gefocussed</li>
+						<li>Gebruik een naming convention en gebruik deze consistent</li>
+					</ul>
+				</section>
+				<section>Vragen?</section>
+				<section>Opdracht 1</section>
+				<section>Opdracht 2</section>
+				<section>Opdracht 3</section>
+				<section>
+					Bonus slides / Next session
+					<ul>
+						<li>Code coverage</li>
+						<li>Test Driven Development</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 

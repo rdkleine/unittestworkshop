@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{04C153C3-4CAD-49B7-B352-20C4E7D0E3E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicService", "LogicService\LogicService.csproj", "{04C153C3-4CAD-49B7-B352-20C4E7D0E3E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Tests", "Service.Tests\Service.Tests.csproj", "{E5DFE777-268A-4F8E-BCBA-3CCF88B6B616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicService.Tests", "LogicService.Tests\LogicService.Tests.csproj", "{E5DFE777-268A-4F8E-BCBA-3CCF88B6B616}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

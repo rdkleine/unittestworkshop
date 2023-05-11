@@ -27,16 +27,18 @@
 					Wat is een Unit Test
 					<ul>
 						<li>Unit of work (function / class / component)</li>
-						<li>Geisoleerd testen</li>
-						<li>Testen of voldaan wordt aan de specs</li>
+						<li>Geisoleerd testen (mocking / DI / Test Db / Sandbox)</li>
+						<li>Assertion of het resultaat of gedrag overeenkomt met de verwachting.</li>
 					</ul>
 				</section>
 				<section>
-					Waarom Unit Test
+					Waarom Unit Testen
 					<ul>
 						<li>Vroegtijdig in het ontwikkelstadion bugs vinden</li>
-						<li>Vangnet wanneer wijzigingen in de codebase worden gemaakt</li>
+						<li>Vangnet wanneer wijzigingen in de codebase worden gemaakt. Voorkomen van nieuw geintroceerde bugs.</li>
 						<li>Onderhoudbaarheid van de codebase vergroten</li>
+						<li>Gedrag kunnen valideren in foutsituaties</li>
+						<li>Bij elke PR de werking van de code kunnen valideren</li>
 					</ul>
 				</section>
 				<section>
@@ -44,7 +46,8 @@
 					<ul>
 						<li>Identificeer een unit of code die getest moet worden</li>
 						<li>Schrijf een test methode die de functionaliteit uitvoerd</li>
-						<li>Gebruik Assertion om te valideren of de code goed uitgevoerd is</li>
+						<li>Gebruik Assertion om te valideren of het verwachte resultaat of gedrag toont</li>
+						<li>Testen van edge cases en exceptions</li>
 					</ul>
 				</section>
 				<section>Voorbeeld van een Unit Test
@@ -75,9 +78,18 @@ public class Calculator
 					Best prectices
 					<ul>
 						<li>Schrijf testen die onafhankelijk zijn van elkaar</li>
-						<li>Test voor resultaat niet de implementatie details</li>
+						<li>Test voor resultaat/gedrag niet de implementatie details</li>
 						<li>Houdt testen klein en gefocussed</li>
 						<li>Gebruik een naming convention en gebruik deze consistent</li>
+					</ul>
+				</section>
+				<section>
+					Hulpmiddelen
+					<ul>
+						<li>Code coverage (in editor)</li>
+						<li></li>
+						<li></li>
+						<li></li>
 					</ul>
 				</section>
 				<section>Vragen?</section>

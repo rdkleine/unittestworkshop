@@ -1,0 +1,46 @@
+@page "/employee-overview"
+@using LogicService.Dto;
+@using LogicService;
+@inject IEmployeeService employeeService
+
+<PageTitle>Employee overview</PageTitle>
+
+<h1>Employee overview</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (employeeList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birthdate</th>
+                <th>Emailaddress</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employeeList)
+            {
+                <tr>
+                    <td>@employee.FirstName @employee.LastName</td>
+                    <td>@employee.BirthDate</td>
+                    <td>@employee.EmailAddress</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Employee>? employeeList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employeeList = employeeService.GetEmployeeList();
+    }
+}

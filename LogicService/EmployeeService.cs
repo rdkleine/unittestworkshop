@@ -3,23 +3,30 @@ using LogicService.Dto;
 namespace LogicService;
 public interface IEmployeeService
 {
-    public List<Employee> GetEmployees();
-    public Employee GetEmployee(int employeeId);
+    public List<Employee> GetEmployeeList();
+    public Employee? GetEmployee(int employeeId);
     public void SaveEmployee(Employee employee);
 }
 
 public class EmployeeService : IEmployeeService
 {
-    //todo automapper
-    public List<Employee> GetEmployees()
+    private readonly IDataService _dataService;
+
+    public EmployeeService(IDataService dataService)
     {
-        return new List<Employee>();
+        _dataService = dataService;
     }
 
-    public Employee GetEmployee(int employeeId)
+    public List<Employee> GetEmployeeList()
+    {
+        // Ophalen lijst van employees
+        return _dataService.GetEmployeeList();
+    }
+
+    public Employee? GetEmployee(int employeeId)
     {
         // Ophalen employee
-        return new Employee();
+        return _dataService.GetEmployee(employeeId);
     }
 
     public void SaveEmployee(Employee employee)
@@ -27,5 +34,6 @@ public class EmployeeService : IEmployeeService
         // oplaan employee gegevens
         // opslaan employee adressen
         // Mail sturen als er iets is gewijzigd
+        _dataService.AddEmployee(employee);
     }
 }

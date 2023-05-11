@@ -13,6 +13,8 @@ public class StoreService : IStoreService
 {
     private MemoryCache cache = new MemoryCache(new MemoryCacheOptions());
 
+    public StoreService(){}
+
     public T? GetItem<T>(int id)
         => cache.Get<T>($"{typeof(T).Name}-{id}");
 

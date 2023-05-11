@@ -1,22 +1,19 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using WebApp.Data;
 using LogicService;
+using LogicService.Dto;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddSingleton(new ServiceDescriptor(typeof(IEmployeeService), new EmployeeService()));
-builder.Services.AddSingleton(new ServiceDescriptor(typeof(IStoreService), new StoreService()));
-builder.Services.AddSingleton(new ServiceDescriptor(typeof(IExternalService), new ExternalService()));
-//builder.Services.AddSingleton<MyMemoryCache>();
-
+builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+builder.Services.AddSingleton<IStoreService, StoreService>();
+builder.Services.AddSingleton<IExternalService, ExternalService>();
+builder.Services.AddSingleton<IDataService, DataService>();
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -33,5 +30,26 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    // Initial setup of the application
+    var employeeService = app.Services.GetService<IEmployeeService>();
+    // Add demo data to the memory cache 
+    employeeService!.SaveEmployee(new Employee()
+    {
+        EmployeeId = 1,
+        FirstName = "John",
+        LastName = "Doe",
+        EmailAddress = ""
+    });
+    employeeService!.SaveEmployee(new Employee()
+    {
+        EmployeeId = 2,
+        FirstName = "Jane",
+        LastName = "Doe",
+        EmailAddress = ""
+    });
+});
 
 app.Run();

@@ -1,3 +1,56 @@
+Uitwerken:
+- Vooraf mensen de workshop locaal laten clonen
+  - mkdir d:\workshop\unittesting
+  - d:
+  - cd d:\workshop\unittesting
+  - git clone https://github.com/rdkleine/unittestworkshop.git
+- Vooraf mensen de benodigde software laten installeren
+- Vooraf mensen Google Forms vragenlijst laten invoeren
+ - Kennisniveau Geen / Beginner / Gevorderde 
+ - Welke verachtingen heb je van de workshop
+ - Wat zijn onderwerpen die je graag behandeld zou willen zien
+ - Ben je aanwezig bij beide sessies
+
+Code coverage FineCodeCoverage
+- https://marketplace.visualstudio.com/items?itemName=FortuneNgwenya.FineCodeCoverage2022
+
+Code coverage zonder VSCode
+- dotnet tool install -g dotnet-reportgenerator-globaltool
+- d:
+- cd d:\workshop\unittesting\unittestworkshop
+- dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+- TODO Onderdeel van Visual Studio dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+- reportgenerator
+    -reports:"d:\workshop\unittesting\TestResults\{guid}\coverage.cobertura.xml"
+    -targetdir:"coveragereport"
+    -reporttypes:Html
+
+ref: https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage?tabs=linux#code-coverage-tooling
+
+Wat is een "Unit"
+-> Een unit is een stukje code dat onafhankelijk van andere code kan worden getest
+-> Een unit kan een methode zijn, een klasse, een module, een component, een service, etc.
+Waarom zijn Unit Tests
+-> Catch bugs early
+-> Safety net for developers
+-> Improve code quality
+-> Improve maintainability
+Hoe schrijf je een Unit Test
+-> Arrange Act Assert
+-> Test for expected results, not for implementation details
+-> Keep tests small and focused
+Wat is een Mock object en waarom is het nodig?
+-> Een Mock object is een nep object dat de werking van een echt object nabootst
+-> Het is nodig om de werking van een echt object te kunnen testen zonder dat het echt object aanwezig is
+Code coverage wordt vaak genoemd maar waarom is het belangrijk?
+-> Code coverage geeft aan welk percentage van de code door de Unit Tests wordt gedekt
+-> Het is belangrijk om te weten of de Unit Tests alle code dekken
+-> Het is belangrijk om te weten of de Unit Tests alle mogelijke paden door de code dekken
+-> Het is belangrijk om te weten of de Unit Tests alle mogelijke scenario's dekken
+-> Het is belangrijk om te weten of de Unit Tests alle mogelijke fouten dekken
+
+
+
 # Workshop Unit Testing
 
 ## Getting started with unit testing

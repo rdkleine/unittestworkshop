@@ -8,6 +8,6 @@ public class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=YourDatabaseName;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=UnitTestWs;Trusted_Connection=True;");
     }
 }

@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.Extensions.Configuration;
 using LogicService;
 using LogicService.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +13,8 @@ builder.Services.AddSingleton<IExternalService, ExternalService>();
 builder.Services.AddSingleton<IDataService, DataService>();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WorkshopDatabase"));
+    options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=UnitTestWs;Trusted_Connection=True;");
+    // options.UseSqlServer(builder.Configuration.GetConnectionString("WorkshopDatabase"));
 });
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -56,5 +54,7 @@ app.Lifetime.ApplicationStarted.Register(() =>
         EmailAddress = ""
     });
 });
+
+DatabaseMigrator.MigrateDatabase(app.Services);
 
 app.Run();

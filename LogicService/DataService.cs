@@ -1,5 +1,5 @@
 using LogicService.Dto;
-
+using AutoMapper;
 namespace LogicService;
 
 public interface IDataService
@@ -12,9 +12,13 @@ public interface IDataService
 public class DataService : IDataService
 {
     private readonly IStoreService _storeService;
-    public DataService(IStoreService storeService)
+    private readonly IMapper _mapper;
+    private readonly DatabaseContext _dbContext;
+    public DataService(IStoreService storeService, DatabaseContext dbContext, IMapper mapper)
     {
         _storeService = storeService;
+        _dbContext = dbContext;
+        _mapper = mapper;
     }
 
     public void AddEmployee(Employee employee)
@@ -26,12 +30,13 @@ public class DataService : IDataService
 
     public Employee? GetEmployee(int idEmployee)
     {
-        var list = GetEmployeeList();
-        return list.Where(e => e.EmployeeId == idEmployee).FirstOrDefault();
+        var employee = _dbContext.Employees.Where(e => e.EmployeeId == idEmployee).FirstOrDefault();
+        return employee == null ? null : _mapper.Map<Model.Employee, Dto.Employee>(employee);
     }
 
     public List<Employee> GetEmployeeList()
     {
-        return _storeService.GetItems<Employee>() ?? new List<Employee>();
+        var employees = _dbContext.Employees.ToList();
+        return _mapper.Map<List<Model.Employee>, List<Dto.Employee>>(employees);
     }
 }

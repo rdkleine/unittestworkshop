@@ -8,6 +8,8 @@ public static class DatabaseMigrator
         using (var scope = serviceProvider.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            var x = dbContext.Database.CanConnect();
+
             dbContext.Database.Migrate();
         }
     }

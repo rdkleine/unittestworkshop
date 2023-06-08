@@ -1,3 +1,10 @@
+Documentatie voor eerste run
+1. Stel connectionstring in voor de database
+2. Run vanuit de root van het project de volgende commando's
+3. dotnet ef migrations add InitialCreate -p LogicService -s WebApp
+4. dotnet ef database update
+
+
 Uitwerken:
 - Vooraf mensen de workshop locaal laten clonen
   - mkdir d:\workshop\unittesting

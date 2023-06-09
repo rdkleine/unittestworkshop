@@ -27,6 +27,7 @@ else
             @foreach (var employee in employeeList)
             {
                 <tr>
+                    <td><button @click=@DeleteEmployee(employee)>Delete</button></td>
                     <td>@employee.FirstName @employee.LastName</td>
                     <td>@employee.BirthDate</td>
                     <td>@employee.EmailAddress</td>
@@ -41,6 +42,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        employeeList = employeeService.GetEmployeeList();
+        employeeList = employeeService.GetList();
+    }
+
+    private void DeleteEmployee(Employee employee)
+    {
+        employeeService.Delete(employee);
     }
 }

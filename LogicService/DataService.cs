@@ -4,7 +4,8 @@ namespace LogicService;
 
 public interface IDataService
 {
-    public void AddEmployee(Employee employee);
+    public void UpsertEmployee(Employee employee);
+    public void DeleteEmployee(int employeeId);
     public Employee? GetEmployee(int idEmployee);
     public List<Employee> GetEmployeeList();
 }
@@ -21,11 +22,10 @@ public class DataService : IDataService
         _mapper = mapper;
     }
 
-    public void AddEmployee(Employee employee)
+    public void UpsertEmployee(Employee employee)
     {
-        var list = GetEmployeeList();
-        list.Add(employee);
-        _storeService.AddItems(list);
+        _dbContext.Employees.Add(_mapper.Map<Dto.Employee, Model.Employee>(employee));
+        _dbContext.SaveChanges();
     }
 
     public Employee? GetEmployee(int idEmployee)
@@ -38,5 +38,12 @@ public class DataService : IDataService
     {
         var employees = _dbContext.Employees.ToList();
         return _mapper.Map<List<Model.Employee>, List<Dto.Employee>>(employees);
+    }
+
+    public void DeleteEmployee(int idEmployee)
+    {
+        var employee = _dbContext.Employees.Where(e => e.EmployeeId == idEmployee).First();
+        _dbContext.Employees.Remove(employee);
+        _dbContext.SaveChanges();
     }
 }

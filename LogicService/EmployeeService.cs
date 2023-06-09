@@ -3,9 +3,10 @@ using LogicService.Dto;
 namespace LogicService;
 public interface IEmployeeService
 {
-    public List<Employee> GetEmployeeList();
-    public Employee? GetEmployee(int employeeId);
-    public void SaveEmployee(Employee employee);
+    public List<Employee> GetList();
+    public Employee? Get(int employeeId);
+    public void Upsert(Employee employee);
+    public void Delete(int employeeId);
 }
 
 public class EmployeeService : IEmployeeService
@@ -17,23 +18,28 @@ public class EmployeeService : IEmployeeService
         _dataService = dataService;
     }
 
-    public List<Employee> GetEmployeeList()
+    public List<Employee> GetList()
     {
         // Ophalen lijst van employees
         return _dataService.GetEmployeeList();
     }
 
-    public Employee? GetEmployee(int employeeId)
+    public Employee? Get(int employeeId)
     {
         // Ophalen employee
         return _dataService.GetEmployee(employeeId);
     }
 
-    public void SaveEmployee(Employee employee)
+    public void Upsert(Employee employee)
     {
         // oplaan employee gegevens
         // opslaan employee adressen
         // Mail sturen als er iets is gewijzigd
-        _dataService.AddEmployee(employee);
+        _dataService.UpsertEmployee(employee);
+    }
+
+    public void Delete(int employeeId)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -31,6 +31,23 @@ namespace LogicService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employer",
+                columns: table => new
+                {
+                    EmployerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Website = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employer", x => x.EmployerId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
@@ -61,6 +78,33 @@ namespace LogicService.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EmployeeEmployer",
+                columns: table => new
+                {
+                    EmployeeEmployerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    EmployerId = table.Column<int>(type: "int", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeEmployer", x => x.EmployeeEmployerId);
+                    table.ForeignKey(
+                        name: "FK_EmployeeEmployer_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeEmployer_Employer_EmployerId",
+                        column: x => x.EmployerId,
+                        principalTable: "Employer",
+                        principalColumn: "EmployerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Addresses",
                 columns: new[] { "AddressId", "City", "Country", "PostalCode", "Street" },
@@ -77,10 +121,36 @@ namespace LogicService.Migrations
                 {
                     { 3, null, "laura.lovelace@logic.example.org", "Laura", null, "Lovelace", null },
                     { 4, null, "Unknown", "John", null, "Travolta", null },
-                    { 5, new DateTime(1948, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Unknown", "Samuel", null, "Jackson", null },
+                    { 5, new DateTime(1948, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Unknown", "Samuel", null, "Jackson", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employer",
+                columns: new[] { "EmployerId", "Deleted", "Email", "Name", "Phone", "Website" },
+                values: new object[,]
+                {
+                    { 1, false, "info@bkb.company", "Big Kahuna Burger", "+0800bigkburger", "https://bkb.company" },
+                    { 2, false, "info@jackrabbit.com", "Jack Rabbit Slim's", "0800123123", "" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "BirthDate", "EmailAddress", "FirstName", "HomeAddressId", "LastName", "PostalAddressId" },
+                values: new object[,]
+                {
                     { 1, new DateTime(1961, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "tim.roth@logic.example.org", "Tim", 101, "Roth", null },
                     { 2, null, "amanda.plummer@logic.example.org", "Amanda", 102, "Plummer", null }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeEmployer_EmployeeId",
+                table: "EmployeeEmployer",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeEmployer_EmployerId",
+                table: "EmployeeEmployer",
+                column: "EmployerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_HomeAddressId",
@@ -101,7 +171,13 @@ namespace LogicService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EmployeeEmployer");
+
+            migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Employer");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

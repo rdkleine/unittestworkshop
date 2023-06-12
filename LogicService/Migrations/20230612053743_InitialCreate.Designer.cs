@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicService.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230608144841_InitialCreate")]
+    [Migration("20230612053743_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -172,6 +172,84 @@ namespace LogicService.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LogicService.Model.EmployeeEmployer", b =>
+                {
+                    b.Property<int>("EmployeeEmployerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeEmployerId"));
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeeEmployerId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("EmployerId");
+
+                    b.ToTable("EmployeeEmployer");
+                });
+
+            modelBuilder.Entity("LogicService.Model.Employer", b =>
+                {
+                    b.Property<int>("EmployerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployerId"));
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmployerId");
+
+                    b.ToTable("Employer");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployerId = 1,
+                            Deleted = false,
+                            Email = "info@bkb.company",
+                            Name = "Big Kahuna Burger",
+                            Phone = "+0800bigkburger",
+                            Website = "https://bkb.company"
+                        },
+                        new
+                        {
+                            EmployerId = 2,
+                            Deleted = false,
+                            Email = "info@jackrabbit.com",
+                            Name = "Jack Rabbit Slim's",
+                            Phone = "0800123123",
+                            Website = ""
+                        });
+                });
+
             modelBuilder.Entity("LogicService.Model.Employee", b =>
                 {
                     b.HasOne("LogicService.Model.Address", "HomeAddress")
@@ -189,6 +267,25 @@ namespace LogicService.Migrations
                     b.Navigation("PostalAddress");
                 });
 
+            modelBuilder.Entity("LogicService.Model.EmployeeEmployer", b =>
+                {
+                    b.HasOne("LogicService.Model.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LogicService.Model.Employer", "Employer")
+                        .WithMany("EmployeeEmployers")
+                        .HasForeignKey("EmployerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Employer");
+                });
+
             modelBuilder.Entity("LogicService.Model.Address", b =>
                 {
                     b.Navigation("EmployeeFromHomeAddress")
@@ -196,6 +293,11 @@ namespace LogicService.Migrations
 
                     b.Navigation("EmployeeFromPostalAddress")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LogicService.Model.Employer", b =>
+                {
+                    b.Navigation("EmployeeEmployers");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,5 @@
 using LogicService;
-using LogicService.Dto;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +13,10 @@ builder.Services.AddScoped<IExternalService, ExternalService>();
 builder.Services.AddScoped<IDataService, DataService>();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseSqlServer("Data Source=localhost,1435;Initial Catalog=UnitTestWs;User ID=sa;Password=#Perspectief!;TrustServerCertificate=true;");
+    var cn = builder.Configuration.GetConnectionString("DefaultConnection");
+    var err = builder.Configuration.GetValue(typeof(bool), "DetailedErrors");
+    options.UseSqlServer(cn);
+    //"Data Source=localhost,1435;Initial Catalog=UnitTestWs;User ID=sa;Password=#Perspectief!;TrustServerCertificate=true;"
 });
 var app = builder.Build();
 // Configure the HTTP request pipeline.

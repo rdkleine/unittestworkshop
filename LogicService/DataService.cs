@@ -4,7 +4,7 @@ namespace LogicService;
 
 public interface IDataService
 {
-    public void UpsertEmployee(Employee employee);
+    public void UpsertEmployee(int employeeId, Employee employee);
     public void DeleteEmployee(int employeeId);
     public Employee? GetEmployee(int idEmployee);
     public List<Employee> GetEmployeeList();
@@ -22,7 +22,7 @@ public class DataService : IDataService
         _mapper = mapper;
     }
 
-    public void UpsertEmployee(Employee employee)
+    public void UpsertEmployee(int employeeId, Employee employee)
     {
         _dbContext.Employees.Add(_mapper.Map<Dto.Employee, Model.Employee>(employee));
         _dbContext.SaveChanges();

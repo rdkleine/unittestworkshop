@@ -3,11 +3,18 @@
 @using LogicService;
 @inject IEmployeeService employeeService
 
-<PageTitle>Employee overview</PageTitle>
+<PageTitle>Overzicht werknemers</PageTitle>
 
-<h1>Employee overview</h1>
+<h1>Overzicht werknemers</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
+<p>
+    [todo]
+    <ul>
+        <li>Lijst met werkgevers</li>
+        <li>selecteer werkgever</li>
+        <li>Filter werknemers</li>
+    </ul>
+</p>
 
 @if (employeeList == null)
 {
@@ -18,6 +25,7 @@ else
     <table class="table">
         <thead>
             <tr>
+                <th>Action</th>
                 <th>Name</th>
                 <th>Birthdate</th>
                 <th>Emailaddress</th>
@@ -27,7 +35,10 @@ else
             @foreach (var employee in employeeList)
             {
                 <tr>
-                    <td><button @click=@DeleteEmployee(employee)>Delete</button></td>
+                    <td>
+                        <button @onclick=@(e => DeleteEmployee(e, employee))>Delete</button>
+                        <button @onclick=@(e => EditEmployee(e, employee))>Edit</button>
+                    </td>
                     <td>@employee.FirstName @employee.LastName</td>
                     <td>@employee.BirthDate</td>
                     <td>@employee.EmailAddress</td>
@@ -45,8 +56,13 @@ else
         employeeList = employeeService.GetList();
     }
 
-    private void DeleteEmployee(Employee employee)
+    private void DeleteEmployee(MouseEventArgs e, Employee employee)
     {
-        employeeService.Delete(employee);
+        employeeService.Delete(employee.EmployeeId);
+    }
+
+    private void EditEmployee(MouseEventArgs e, Employee employee)
+    {
+        employeeService.Delete(employee.EmployeeId);
     }
 }

@@ -1,3 +1,4 @@
+using System.Transactions;
 using LogicService.Dto;
 
 namespace LogicService;
@@ -32,14 +33,15 @@ public class EmployeeService : IEmployeeService
 
     public void Upsert(Employee employee)
     {
-        // oplaan employee gegevens
-        // opslaan employee adressen
-        // Mail sturen als er iets is gewijzigd
-        _dataService.UpsertEmployee(employee);
+        using var scope = new TransactionScope();
+
+        _dataService.UpsertEmployee(employee.EmployeeId, employee);
+
+        scope.Complete();
     }
 
     public void Delete(int employeeId)
     {
-        throw new NotImplementedException();
+        _dataService.DeleteEmployee(employeeId);
     }
 }

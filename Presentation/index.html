@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+					## Introductie
+					Welkom bij de Unit Test workshop.
+					Vandaag gaan we leren wat Unit Testen zijn en waarom het belangrijk is om te testen.
+				</textarea>
+				</section>
+				<section>
+					<section>
+						<h2>Wat is een Unit Test</h2>
+					</section>
+					<section>
+						Unit of work (function / class / component)
+					</section>
+					<section>
+						Geisoleerd testen (mocking / DI / Test Db / Sandbox)
+					</section>
+					<section>
+						Assertion of het resultaat of gedrag overeenkomt met de verwachting.
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Waarom Unit Testen</h2>
+					</section>
+					<section>
+						<h3>Vroegtijdig in het ontwikkelstadion bugs vinden</h3>
+					</section>
+					<section>
+						<li>Vangnet wanneer wijzigingen in de codebase worden gemaakt. Voorkomen van nieuw geintroceerde bugs.</li>
+					</section>
+					<section>
+						<li>Onderhoudbaarheid van de codebase vergroten</li>
+					</section>
+					<section>
+						<li>Gedrag kunnen valideren in foutsituaties</li>
+					</section>
+					<section>
+						<li>Bij elke PR de werking van de code kunnen valideren</li>
+					</section>
+				</section>
+				<section>
+					Hoe schrijven we Unit Tests
+					<ul>
+						<li>Identificeer een unit of code die getest moet worden</li>
+						<li>Schrijf een test methode die de functionaliteit uitvoerd</li>
+						<li>Gebruik Assertion om te valideren of het verwachte resultaat of gedrag toont</li>
+						<li>Testen van edge cases en exceptions</li>
+					</ul>
+				</section>
+				<section>Voorbeeld van een Unit Test
+					<pre>
+// Test Method
+public void TestAddition()
+{
+    // Arrange
+    Calculator calculator = new Calculator();
+    
+    // Act
+    int result = calculator.Add(2, 3);
+    
+    // Assert
+    Assert.AreEqual(5, result);
+}
+// Code under test
+public class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+					</pre>
+				</section>
+				<section>
+					Best prectices
+					<ul>
+						<li>Schrijf testen die onafhankelijk zijn van elkaar</li>
+						<li>Test voor resultaat/gedrag niet de implementatie details</li>
+						<li>Houdt testen klein en gefocussed</li>
+						<li>Gebruik een naming convention en gebruik deze consistent</li>
+					</ul>
+				</section>
+				<section>
+					Hulpmiddelen
+					<ul>
+						<li>Code coverage (in editor)</li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</section>
+				<section>Vragen?</section>
+				<section>
+					<section>
+						<h1>Opdracht A</h1>
+						<p>Bestaande functionaliteit aanpassen</p>
+					</section>
+					<section>
+						<p>Toevoegen/bewerken van werknemergegevens in EmployeeService.cs</p>
+						<ul>
+							<li>Validatie op gegevens toevoegen</li>
+							<li>Email versturen dat gegevens zijn opgeslagen</li>
+							<li>Resultaat of actie gelukt is</li>
+						</ul>
+					</section>
+					<section>
+						<p>Leerdoel van de opdracht</p>
+						<ul>
+							<li>Toevoegen van Unit Tests</li>
+							<li>Testen van bestaande functionaliteit</li>
+							<li>Testen van nieuwe functionaliteit</li>
+						</ul>
+					</section>					
+					<section>
+						<p>
+							<ul>
+								<li>Probeer te werken vanuit Unit Tests (TDD)</li>
+								<li>Denk aan wat er gebeurt indien er geen mail gestuurd kan worden</li>
+							</ul>
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Opdracht B</h1>
+						<p>DbContext data vullen tbv unittesten</p>
+					</section>
+					<section>
+						<p>DbContext vullen met data hierop filteren</p>
+						<ul>
+							<li>Zoekfunctie voor filteren op werkgever</li>
+							<li>Zoekfunctie voor filteren op naam</li>
+							<li>Resultaat valideren in goed en fout situatie</li>
+						</ul>
+					</section>
+				</section>
+				<section>Opdracht C</section>
+				<section>
+					Bonus slides / Next session
+					<ul>
+						<li>Code coverage</li>
+						<li>Test Driven Development</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+@page "/"
+@page "/employees"
+@using LogicService.Dto;
+@using LogicService;
+@inject IEmployeeService employeeService
+@inject NavigationManager navigateManager
+
+<PageTitle>Overzicht werknemers</PageTitle>
+
+<h1>Overzicht werknemers</h1>
+
+<p>
+    [todo]
+    <ul>
+        <li>Lijst met werkgevers</li>
+        <li>selecteer werkgever</li>
+        <li>Filter werknemers</li>
+    </ul>
+</p>
+
+@if (employeeList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Birthdate</th>
+                <th>Emailaddress</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employeeList)
+            {
+                <tr>
+                    <td>
+                        <button @onclick=@(e => DeleteEmployee(e, employee))>Delete</button>
+                        <button @onclick=@(e => EditEmployee(e, employee))>Edit</button>
+                    </td>
+                    <td>@employee.FirstName @employee.LastName</td>
+                    <td>@employee.BirthDate</td>
+                    <td>@employee.EmailAddress</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Employee>? employeeList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employeeList = employeeService.GetList();
+    }
+
+    private void DeleteEmployee(MouseEventArgs e, Employee employee)
+    {
+        employeeService.Delete(employee.EmployeeId);
+    }
+
+    private void EditEmployee(MouseEventArgs e, Employee employee)
+    {
+        navigateManager.NavigateTo($"/employees/{employee.EmployeeId}");
+    }
+}

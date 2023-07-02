@@ -1,7 +1,8 @@
-@page "/employee-overview"
+@page "/employees"
 @using LogicService.Dto;
 @using LogicService;
 @inject IEmployeeService employeeService
+@inject NavigationManager navigateManager
 
 <PageTitle>Overzicht werknemers</PageTitle>
 
@@ -63,6 +64,6 @@ else
 
     private void EditEmployee(MouseEventArgs e, Employee employee)
     {
-        employeeService.Delete(employee.EmployeeId);
+        navigateManager.NavigateTo($"/employees/{employee.EmployeeId}");
     }
 }

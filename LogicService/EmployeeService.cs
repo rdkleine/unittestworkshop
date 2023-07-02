@@ -35,7 +35,7 @@ public class EmployeeService : IEmployeeService
     {
         using var scope = new TransactionScope();
 
-        _dataService.UpsertEmployee(employee.EmployeeId, employee);
+        _dataService.UpdateEmployee(employee.EmployeeId, employee);
 
         scope.Complete();
     }

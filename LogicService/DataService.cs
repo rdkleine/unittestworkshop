@@ -4,7 +4,8 @@ namespace LogicService;
 
 public interface IDataService
 {
-    public void UpsertEmployee(int employeeId, Employee employee);
+    public void AddEmployee(Employee employee);
+    public void UpdateEmployee(int employeeId, Employee employee);
     public void DeleteEmployee(int employeeId);
     public Employee? GetEmployee(int idEmployee);
     public List<Employee> GetEmployeeList();
@@ -12,20 +13,22 @@ public interface IDataService
 
 public class DataService : IDataService
 {
-    private readonly IStoreService _storeService;
     private readonly IMapper _mapper;
     private readonly DatabaseContext _dbContext;
-    public DataService(IStoreService storeService, DatabaseContext dbContext, IMapper mapper)
+    public DataService(DatabaseContext dbContext, IMapper mapper)
     {
-        _storeService = storeService;
         _dbContext = dbContext;
         _mapper = mapper;
     }
 
-    public void UpsertEmployee(int employeeId, Employee employee)
+    public void AddEmployee(Employee employeeDto)
+    { }
+
+    public void UpdateEmployee(int employeeId, Employee employeeDto)
     {
-        _dbContext.Employees.Add(_mapper.Map<Dto.Employee, Model.Employee>(employee));
-        _dbContext.SaveChanges();
+        var employeeRecord = _dbContext.Employees.Where(e => e.EmployeeId == employeeId).First();
+        _mapper.Map<Dto.Employee, Model.Employee>(employeeDto, employeeRecord);
+        var result = _dbContext.SaveChanges();
     }
 
     public Employee? GetEmployee(int idEmployee)

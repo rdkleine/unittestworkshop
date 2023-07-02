@@ -1,0 +1,53 @@
+@page "/employees/{EmployeeId:int}"
+@using LogicService.Dto;
+@using LogicService;
+@inject IEmployeeService employeeService
+@inject NavigationManager navigationManager
+
+<PageTitle>Werknemer details</PageTitle>
+
+<h1>Werknemer details</h1>
+
+<p>
+    <form>
+        <div class="form-group">
+            <label for="firstname">Voornaam</label>
+            <input type="text" @bind=@Employee.FirstName class="form-control" id="firstname" placeholder="firstname">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Achternaam</label>
+            <input type="text" @bind=@Employee.LastName class="form-control" id="lastname" placeholder="lastname">
+        </div>        
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" @bind=@Employee.EmailAddress class="form-control" id="email" placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+            <label for="birthdate">Geboortedatum</label>
+            <InputDate Type="InputDateType.Date" class="form-control" id="birthdate" @bind-Value="Employee.BirthDate"> </InputDate>
+        </div>  
+        <button type="button" class="btn btn-primary" @onclick="Save">Opslaan</button>
+        <button type="button" class="btn btn-secondary" @onclick="Cancel">Terug</button>
+    </form>
+</p>
+
+@code {
+    [Parameter]
+    public int EmployeeId { get; set; }
+    public Employee Employee { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Employee = employeeService.Get(EmployeeId);
+    }
+
+    public void Save()
+    {
+        employeeService.Upsert(Employee);
+    }
+
+    public void Cancel()
+    {
+        navigationManager.NavigateTo("/employees");
+    }
+}

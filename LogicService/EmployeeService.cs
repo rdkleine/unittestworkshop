@@ -13,6 +13,7 @@ public interface IEmployeeService
 public class EmployeeService : IEmployeeService
 {
     private readonly IDataService _dataService;
+    //private readonly IEmailService _emailService;
 
     public EmployeeService(IDataService dataService)
     {
@@ -33,11 +34,11 @@ public class EmployeeService : IEmployeeService
 
     public void Upsert(Employee employee)
     {
-        using var scope = new TransactionScope();
-
+        // using var scope = new TransactionScope();
+        
         _dataService.UpdateEmployee(employee.EmployeeId, employee);
 
-        scope.Complete();
+        // scope.Complete();
     }
 
     public void Delete(int employeeId)

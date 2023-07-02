@@ -24,6 +24,7 @@ public class DataService : IDataService
     public void AddEmployee(Employee employeeDto)
     { }
 
+    /// <summary>Update employee with idEmployee</summary>
     public void UpdateEmployee(int employeeId, Employee employeeDto)
     {
         var employeeRecord = _dbContext.Employees.Where(e => e.EmployeeId == employeeId).First();
@@ -31,22 +32,25 @@ public class DataService : IDataService
         var result = _dbContext.SaveChanges();
     }
 
+    /// <summary>Get employee with idEmployee</summary>
     public Employee? GetEmployee(int idEmployee)
     {
         var employee = _dbContext.Employees.Where(e => e.EmployeeId == idEmployee).FirstOrDefault();
         return employee == null ? null : _mapper.Map<Model.Employee, Dto.Employee>(employee);
     }
 
+    /// <summary>Get list of employees</summary>
     public List<Employee> GetEmployeeList()
     {
         var employees = _dbContext.Employees.ToList();
         return _mapper.Map<List<Model.Employee>, List<Dto.Employee>>(employees);
     }
 
+    /// <summary>Soft delete employee</summary>
     public void DeleteEmployee(int idEmployee)
     {
         var employee = _dbContext.Employees.Where(e => e.EmployeeId == idEmployee).First();
-        _dbContext.Employees.Remove(employee);
+        employee.Deleted = true;
         _dbContext.SaveChanges();
     }
 }

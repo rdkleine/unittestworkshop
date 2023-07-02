@@ -1,23 +1,12 @@
-// using Blazored.LocalStorage;
-// using Blazored.SessionStorage;
 using Bunit;
 using Bunit.TestDoubles;
-// using Microsoft.AspNetCore.Authentication;
-// using Microsoft.AspNetCore.Hosting;
-// using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Moq;
-using System;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using Xunit.Abstractions;
-
 
 namespace LogicService.Tests;
 
@@ -33,7 +22,6 @@ public class BaseBlazorTest : IDisposable
         TestContext = new TestContext();
         RegisterServices();
         Console.SetOut(new TestOutputWriter(outputHelper));
-        // InitInMemoryDatabase(TestContext!.Services.GetService<IDbContextFactory<Camas.Entities.Context.CamasDbContext>>()!);
     }
 
     private void RegisterServices()
@@ -44,7 +32,6 @@ public class BaseBlazorTest : IDisposable
         services.AddScoped<Microsoft.Extensions.Logging.ILogger, Logger<BaseBlazorTest>>();
         var asm = AppDomain.CurrentDomain.GetAssemblies();
         services.AddAutoMapper(asm.Where(a => a.FullName!.Contains("LogicService")).ToArray());
-        // services.AddScoped<EmailSchedulerService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
         TestContext.JSInterop.Mode = JSRuntimeMode.Loose;
 

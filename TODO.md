@@ -1,0 +1,3 @@
+- Meer afbeeldingen maken?
+- Voorbeeld doorlopen
+- Presentatie bijwerken

@@ -27,3 +27,13 @@ Probeer te werken vanuit de TDD gedachte. Schrijf eerst een test en maak dan de 
 
 Denk ook na over verwijderde werknemers. 
 
+## Opdracht C
+Code: Zoek een bestaand stuk code uit de Camas V2 codebase waar je graag unittesten voor zou willen schrijven.
+
+- Identificeer een unit of code die niet te groot is
+- Beschrijf een aantal test benamingen die goed passen voor deze code. 
+  - Identificeer edge cases
+  - Bedenk voor de services die middels DI gebruikt worden hoe deze kunnen gemocked worden. En hoe je een fout situeatie kunt nabootsen.
+  - Bedenkt 1 of meerdere happy flows.
+- Werk de testen uit.
+- Kijk of er gebruik gemaakt kan worden van bestaande DataBuilders of maak eventueel een nieuwe aan.

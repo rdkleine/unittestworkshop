@@ -9,6 +9,8 @@ public interface IDataService
     public void DeleteEmployee(int employeeId);
     public Employee? GetEmployee(int idEmployee);
     public List<Employee> GetEmployeeList();
+    public List<Employee> GetEmployeeList(int employerId);
+    public Employer? GetEmployer(int employerId);
 }
 
 public class DataService : IDataService
@@ -52,5 +54,20 @@ public class DataService : IDataService
         var employee = _dbContext.Employees.Where(e => e.EmployeeId == idEmployee).First();
         employee.Deleted = true;
         _dbContext.SaveChanges();
+    }
+
+    public Employer? GetEmployer(int employerId)
+    {
+        var employer = _dbContext.Employers.Where(e => e.EmployerId == employerId).FirstOrDefault();
+        return employer == null ? null : _mapper.Map<Model.Employer, Employer>(employer);
+    }
+
+    public List<Employee> GetEmployeeList(int employerId)
+    {
+        var employees = _dbContext
+            .Employers.Where(e => e.EmployerId == employerId).FirstOrDefault()?
+            .EmployeeEmployers.Select(ee => ee.Employee)
+            .ToList();
+        return employees is null ? new List<Employee>() : _mapper.Map<List<Model.Employee>, List<Dto.Employee>>(employees);
     }
 }

@@ -5,6 +5,7 @@ namespace LogicService;
 public interface IEmployeeService
 {
     //public List<Employee> SearchEmployees(..)
+    public List<Employee> GetListForEmployer(int employerId);
     public List<Employee> GetList();
     public Employee? Get(int employeeId);
     public void Upsert(Employee employee);
@@ -37,7 +38,7 @@ public class EmployeeService : IEmployeeService
     {
         // Use scope for transaction
         // using var scope = new TransactionScope();
-        
+
         // Add validation
         _dataService.UpdateEmployee(employee.EmployeeId, employee);
 
@@ -51,5 +52,16 @@ public class EmployeeService : IEmployeeService
     public void Delete(int employeeId)
     {
         _dataService.DeleteEmployee(employeeId);
+    }
+
+    public List<Employee> GetListForEmployer(int employerId)
+    {
+        // Check if Employer exists
+        var employer = _dataService.GetEmployer(employerId);
+        if (employer is null)
+            return new List<Employee>();
+
+        // Get list of employees
+        return _dataService.GetEmployeeList(employerId);
     }
 }

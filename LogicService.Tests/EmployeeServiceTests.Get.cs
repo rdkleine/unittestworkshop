@@ -1,4 +1,4 @@
-
+using AutoFixture;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit.Abstractions;
 
@@ -83,5 +83,27 @@ public partial class EmployeeServiceTestsGet : BaseBlazorTest
         Assert.NotNull(result);
         Assert.Equal(1, result.EmployeeId);
         Assert.Equal("Hoorn", result.HomeAddress.City);
+    }
+
+    [Fact]
+    public void GetUsingAutofixture_HappyFlow_ShouldReturnEmployee()
+    {
+        // Arrange
+        var fixture = new Fixture();
+        fixture.Behaviors.Add(new OmitOnRecursionBehavior(recursionDepth: 1));
+        var employee = fixture.Create<Model.Employee>();
+        TestContext!.Services.AddScoped<IDataService, DataService>();
+        using var dbContext = TestContext!.Services.GetService<DatabaseContext>();
+        dbContext!.Employees.Add(employee);
+        dbContext.SaveChanges();
+
+        // Act
+        var employeeService = TestContext!.Services.GetService<IEmployeeService>() as IEmployeeService;
+        var result = employeeService!.Get(employee.EmployeeId);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(employee.EmployeeId, result.EmployeeId);
+        Assert.Equal(result.HomeAddress.City, result.HomeAddress.City);
     }
 }

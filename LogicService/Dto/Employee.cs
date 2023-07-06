@@ -1,4 +1,10 @@
 namespace LogicService.Dto;
+
+public class Employer
+{
+    public int EmployerId { get; set; }
+}
+
 public class Employee
 {
     public int EmployeeId { get; set; }

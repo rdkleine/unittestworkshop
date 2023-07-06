@@ -6,6 +6,7 @@ public partial class DatabaseContext : DbContext
 {
     public DbSet<Model.Employee> Employees { get; set; } = default!;
     public DbSet<Model.Address> Addresses { get; set; } = default!;
+    public DbSet<Model.Employer> Employers { get; set; } = default!;
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     { }

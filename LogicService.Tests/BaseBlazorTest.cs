@@ -2,7 +2,6 @@ using Bunit;
 using Bunit.TestDoubles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Text;
@@ -15,7 +14,6 @@ public class BaseBlazorTest : IDisposable
     protected TestContext? TestContext { get; private set; }
     protected TestAuthorizationContext AuthContext { get; private set; } = default!;
     private bool _disposed = false;
-    private IConfiguration _configuration { get; set; }
 
     protected BaseBlazorTest(ITestOutputHelper outputHelper)
     {

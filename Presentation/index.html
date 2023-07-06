@@ -16,58 +16,72 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-markdown>
-					<textarea data-template>
-					## Introductie
-					Welkom bij de Unit Test workshop.
-					Vandaag gaan we leren wat Unit Testen zijn en waarom het belangrijk is om te testen.
-				</textarea>
+				<section>
+					<section>
+						<h3>Welkom bij de workshop<br/> Unit Testing</h3>
+					</section>
+					<section>
+						<p>Inhoud</p>
+						<ul>
+							<li>Presentatie Unit Testen</li>
+							<li>Workshop</li>
+							<li>Afsluiting</li>
+						</ul>
+					</section>
 				</section>
 				<section>
 					<section>
-						<h2>Wat is een Unit Test</h2>
+						<h3>Wat is een Unit Test</h3>
 					</section>
 					<section>
 						Unit of work (function / class / component)
 					</section>
 					<section>
-						Geisoleerd testen (mocking / DI / Test Db / Sandbox)
+						Geïsoleerd testen (mocking / DI / Test Db / Sandbox)
 					</section>
 					<section>
-						Assertion of het resultaat of gedrag overeenkomt met de verwachting.
+						Assertion (controle) of het resultaat of gedrag overeenkomt met de verwachting.
 					</section>
 				</section>
 				<section>
 					<section>
-						<h2>Waarom Unit Testen</h2>
+						<h3>Waarom Unit Testen</h3>
 					</section>
 					<section>
-						<h3>Vroegtijdig in het ontwikkelstadion bugs vinden</h3>
+						Vroegtijdig in het ontwikkelstadium bugs vinden
 					</section>
 					<section>
-						<li>Vangnet wanneer wijzigingen in de codebase worden gemaakt. Voorkomen van nieuw geintroceerde bugs.</li>
+						Vangnet wanneer wijzigingen in de codebase worden gemaakt. Voorkomen van nieuw geïntroduceerde bugs.
 					</section>
 					<section>
-						<li>Onderhoudbaarheid van de codebase vergroten</li>
+						Onderhoudbaarheid van de codebase vergroten
 					</section>
 					<section>
-						<li>Gedrag kunnen valideren in foutsituaties</li>
+						Gedrag kunnen valideren in foutsituaties (externe service valt uit bijvoorbeeld)
 					</section>
 					<section>
-						<li>Bij elke PR de werking van de code kunnen valideren</li>
+						Bij elke PR de werking van de code kunnen valideren
 					</section>
 				</section>
 				<section>
-					Hoe schrijven we Unit Tests
-					<ul>
-						<li>Identificeer een unit of code die getest moet worden</li>
-						<li>Schrijf een test methode die de functionaliteit uitvoerd</li>
-						<li>Gebruik Assertion om te valideren of het verwachte resultaat of gedrag toont</li>
-						<li>Testen van edge cases en exceptions</li>
-					</ul>
+					<section>
+						<h3>Hoe schrijven we Unit Tests</h3>
+					</section>
+					<section>
+						<ul>
+							<li>Identificeer een unit of code die getest moet worden</li>
+							<li>Schrijf een test methode die de functionaliteit uitvoerd</li>
+							<li>Gebruik Assertion om te valideren of het verwachte resultaat of gedrag toont</li>
+							<li>Testen van edge cases en exceptions</li>
+						</ul>
+					</section>
 				</section>
-				<section>Voorbeeld van een Unit Test
-					<pre>
+				<section>
+					<secion>
+						<h3>Voorbeeld van een Unit Test</h3>
+					</secion>
+					<section>
+						<pre>
 // Test Method
 public void TestAddition()
 {
@@ -88,30 +102,37 @@ public class Calculator
         return a + b;
     }
 }
-					</pre>
+						</pre>
+					</section>
 				</section>
 				<section>
-					Best prectices
-					<ul>
-						<li>Schrijf testen die onafhankelijk zijn van elkaar</li>
-						<li>Test voor resultaat/gedrag niet de implementatie details</li>
-						<li>Houdt testen klein en gefocussed</li>
-						<li>Gebruik een naming convention en gebruik deze consistent</li>
-					</ul>
+					<section>
+						<h3>Best practices</h3>
+					</section>
+					<section>
+						<ul>
+							<li>Schrijf testen die onafhankelijk zijn van elkaar</li>
+							<li>Test voor resultaat/gedrag</li>
+							<li>Houdt testen klein en gefocussed</li>
+							<li>Gebruik een naming convention en gebruik deze consistent</li>
+						</ul>
+					</section>
 				</section>
 				<section>
-					Hulpmiddelen
-					<ul>
-						<li>Code coverage (in editor)</li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
+					<section>
+						<h3>Hulpmiddelen</h3>
+					</section>
+					<section>
+						<ul>
+							<li>Code coverage (in editor)</li>
+							<li>(demo)</li>
+						</ul>
+					</section>
 				</section>
 				<section>Vragen?</section>
 				<section>
 					<section>
-						<h1>Opdracht A</h1>
+						<h3>Opdracht A</h3>
 						<p>Bestaande functionaliteit aanpassen</p>
 					</section>
 					<section>
@@ -122,44 +143,40 @@ public class Calculator
 							<li>Resultaat of actie gelukt is</li>
 						</ul>
 					</section>
-					<section>
-						<p>Leerdoel van de opdracht</p>
-						<ul>
-							<li>Toevoegen van Unit Tests</li>
-							<li>Testen van bestaande functionaliteit</li>
-							<li>Testen van nieuwe functionaliteit</li>
-						</ul>
-					</section>					
-					<section>
-						<p>
-							<ul>
-								<li>Probeer te werken vanuit Unit Tests (TDD)</li>
-								<li>Denk aan wat er gebeurt indien er geen mail gestuurd kan worden</li>
-							</ul>
-						</p>
-					</section>
 				</section>
 				<section>
 					<section>
-						<h1>Opdracht B</h1>
+						<h3>Opdracht B</h3>
 						<p>DbContext data vullen tbv unittesten</p>
 					</section>
 					<section>
 						<p>DbContext vullen met data hierop filteren</p>
 						<ul>
-							<li>Zoekfunctie voor filteren op werkgever</li>
-							<li>Zoekfunctie voor filteren op naam</li>
+							<li>Zoekfunctie voor filteren op gegevens werknemer</li>
 							<li>Resultaat valideren in goed en fout situatie</li>
 						</ul>
 					</section>
 				</section>
-				<section>Opdracht C</section>
 				<section>
-					Bonus slides / Next session
-					<ul>
-						<li>Code coverage</li>
-						<li>Test Driven Development</li>
-					</ul>
+					<section>
+						<h3>Opdracht C</h3>
+						<p>Camas V2 onderdeel die je graag zou willen aanpakken.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Next session</h3>
+					</section>
+					<section>
+						<ul>
+							<li>Test Driven Development?</li>
+							<li>Geparameteriseerd testen?</li>
+							<li>Meer mocking/stubbing?</li>
+							<li>BYOC (bring your own code)?</li>
+							<li>Code complexity / unit testable?</li>
+							<li>Kom met je ideën?</li>
+						</ul>
+					</section>
 				</section>
 			</div>
 		</div>

@@ -27,12 +27,18 @@ public class BaseBlazorTest : IDisposable
         var services = TestContext!.Services;
         AuthContext = TestContext!.AddTestAuthorization();
 
+        // Logging, as is.
         services.AddScoped<Microsoft.Extensions.Logging.ILogger, Logger<BaseBlazorTest>>();
+
+        // Automapper hebben we nodig om te mappen tussen DTO's en Entities. Blijft as is.
         var asm = AppDomain.CurrentDomain.GetAssemblies();
         services.AddAutoMapper(asm.Where(a => a.FullName!.Contains("LogicService")).ToArray());
+
+        // Voor de workshop gaan we de werkelijke implementatie van de Employeeservice gebruiken.  
         services.AddScoped<IEmployeeService, EmployeeService>();
         TestContext.JSInterop.Mode = JSRuntimeMode.Loose;
 
+        // We gebruiken een in memory database zoals we in Camas ook doen. Hierdoor kunnen we de in code queries testen.
         services.AddDbContextFactory<DatabaseContext>(options =>
            {
                options.UseInMemoryDatabase($"UnitTestWS-{Guid.NewGuid()}")

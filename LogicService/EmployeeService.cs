@@ -4,7 +4,7 @@ using LogicService.Dto;
 namespace LogicService;
 public interface IEmployeeService
 {
-    //public List<Employee> SearchEmployees(..)
+    public List<Employee> SearchEmployees(string firstName, string lastName);
     public List<Employee> GetListForEmployer(int employerId);
     public List<Employee> GetList();
     public Employee? Get(int employeeId);
@@ -51,7 +51,12 @@ public class EmployeeService : IEmployeeService
 
     public void Delete(int employeeId)
     {
+        // Bestaat de employee?
+        // Is de employee nog niet verwijderd?
         _dataService.DeleteEmployee(employeeId);
+        // Controleren of het gelukt is?
+        // Mail sturen aan werkgever/werknemer dat zijn gegevens zijn verwijderd?
+        // Iets met het resultaat doen?
     }
 
     public List<Employee> GetListForEmployer(int employerId)
@@ -63,5 +68,11 @@ public class EmployeeService : IEmployeeService
 
         // Get list of employees
         return _dataService.GetEmployeeList(employerId);
+    }
+
+    public List<Employee> SearchEmployees(string firstName, string lastName)
+    {
+        // Get list of employees
+        return _dataService.GetEmployeeList(firstName, lastName);
     }
 }

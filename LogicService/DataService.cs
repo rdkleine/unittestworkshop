@@ -9,6 +9,7 @@ public interface IDataService
     public void DeleteEmployee(int employeeId);
     public Employee? GetEmployee(int idEmployee);
     public List<Employee> GetEmployeeList();
+    public List<Employee> GetEmployeeList(string filterFirstName, string filterLastName);
     public List<Employee> GetEmployeeList(int employerId);
     public Employer? GetEmployer(int employerId);
 }
@@ -69,5 +70,15 @@ public class DataService : IDataService
             .EmployeeEmployers.Select(ee => ee.Employee)
             .ToList();
         return employees is null ? new List<Employee>() : _mapper.Map<List<Model.Employee>, List<Dto.Employee>>(employees);
+    }
+
+    public List<Employee> GetEmployeeList(string filterFirstName, string filterLastName)
+    {
+        var employees = _dbContext.Employees.Select(e => e);
+        if (!string.IsNullOrEmpty(filterFirstName))
+            employees = employees.Where(e => e.FirstName.Contains(filterFirstName));
+        if (!string.IsNullOrEmpty(filterLastName))
+            employees = employees.Where(e => e.LastName.Contains(filterLastName));
+        return _mapper.Map<List<Model.Employee>, List<Dto.Employee>>(employees.ToList());
     }
 }

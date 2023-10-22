@@ -52,6 +52,8 @@ public class EmployeeService : IEmployeeService
     public void Delete(int employeeId)
     {
         // Bestaat de employee?
+        var emp = _dataService.GetEmployee(employeeId);
+
         // Is de employee nog niet verwijderd?
         _dataService.DeleteEmployee(employeeId);
         // Controleren of het gelukt is?

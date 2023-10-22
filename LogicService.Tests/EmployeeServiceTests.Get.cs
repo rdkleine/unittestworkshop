@@ -10,23 +10,6 @@ public partial class EmployeeServiceTestsGet : BaseBlazorTest
     { }
 
     [Fact]
-    public void GetMockDb_HappyFlow_ShouldReturnEmployee()
-    {
-        // Arrange
-        var dbMock = new Moq.Mock<IDataService>();
-        dbMock.Setup(x => x.GetEmployee(1)).Returns(new Dto.Employee { EmployeeId = 1, FirstName = "John", LastName = "Doe" });
-        TestContext!.Services.AddScoped<IDataService>(x => dbMock.Object);
-
-        // Act
-        var employeeService = TestContext!.Services.GetService<IEmployeeService>() as IEmployeeService;
-        var result = employeeService!.Get(1);
-
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal(1, result.EmployeeId);
-    }
-
-    [Fact]
     public void GetUsingDb_HappyFlow_ShouldReturnEmployee()
     {
         // Arrange
@@ -51,6 +34,22 @@ public partial class EmployeeServiceTestsGet : BaseBlazorTest
         Assert.Equal(1, result.EmployeeId);
     }
 
+    [Fact]
+    public void GetMockDb_HappyFlow_ShouldReturnEmployee()
+    {
+        // Arrange
+        var dbMock = new Moq.Mock<IDataService>();
+        dbMock.Setup(x => x.GetEmployee(1)).Returns(new Dto.Employee { EmployeeId = 1, FirstName = "John", LastName = "Doe" });
+        TestContext!.Services.AddScoped<IDataService>(x => dbMock.Object);
+
+        // Act
+        var employeeService = TestContext!.Services.GetService<IEmployeeService>() as IEmployeeService;
+        var result = employeeService!.Get(1);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(1, result.EmployeeId);
+    }
 
     [Fact]
     public void GetUsingDatabuilder_HappyFlow_ShouldReturnEmployee()
